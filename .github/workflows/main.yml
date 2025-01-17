@@ -12,18 +12,21 @@ jobs:
       - name: Obter o código da aplicação
         uses: actions/checkout@v4
 
-      -
-        name: Autenticar no Docker Hub
+      - name: Autenticando no Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}      
 
-      - name: Construir a Imagem Docker
-        run: echo "Executando o comando docker build"
-
-      - name: Enviar a Imagem Docker
-        run: echo "Executando o comando docker push"
+      - name: Construindo e Enviando a Imagem Docker
+        uses: docker/build-push-action@v6
+        with:
+          context: ./src
+          push: true
+          file: ./src/Dockerfile
+          tags: |
+            americojar2014/fake-shop:latest
+            americojar2014/fake-shop:v${{ github.run_number }}
 
   cd:
     runs-on: ubuntu-latest
