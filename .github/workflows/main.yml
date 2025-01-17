@@ -7,7 +7,7 @@ on:
 
 jobs:
   ci:
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Autenticar no Docker Hub
         run: echo "Executando o comando docker login"
@@ -19,7 +19,7 @@ jobs:
         run: echo "Executando o comando docker push"
 
   cd:
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Autenticar na AWS
         run: echo "Executando o comando aws configure"
